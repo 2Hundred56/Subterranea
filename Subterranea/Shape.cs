@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 namespace Subterranea {
     public abstract class Shape {
         public abstract Rectangle getBounds();
-        private PhysicsObject parent;
+        protected PhysicsObject parent;
         public Shape(PhysicsObject parent) {
             this.parent = parent;
         }
