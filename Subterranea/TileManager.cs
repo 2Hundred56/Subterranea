@@ -29,6 +29,7 @@ namespace Subterranea {
         }
         public TileManager() {
             nulltile = new Tile();
+            objects = new HashSet<LivingObject>();
         }
         public void Update(GameTime delta) {
             foreach (LivingObject obj in objects) {
