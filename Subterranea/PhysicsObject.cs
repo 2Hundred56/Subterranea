@@ -11,8 +11,11 @@ namespace Subterranea {
         public abstract Vector2 GetPosition();
         public abstract void SetPosition(Vector2 pos);
         protected TileManager manager;
-        public Shape shape;
+        protected Shape shape;
         public bool noPenetration = false;
+
+        public Shape Shape { get => shape; set => shape = value; }
+
         public PhysicsObject(TileManager mng) {
             manager = mng;
         }

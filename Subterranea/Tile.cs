@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 namespace Subterranea {
     public class Tile : PhysicsObject {
         public bool sloped;
-        public int slopeRotation;
+        protected int slopeRotation;
         protected bool filled = false;
         public bool isnull = false;
         protected Vector2 position = new Vector2(0, 0);
@@ -45,13 +45,21 @@ namespace Subterranea {
         public Tile() : base(null){
             isnull = true;
         }
+        public int Slope {
+            get => slopeRotation;
+            set {
+                sloped = true;
+                slopeRotation = value;
+                shape = Polygon.RightTriangle(this, value, 0.5f);
+            }
+        }
         public Tile(TileManager mng, bool filled, Vector2 pos) : base(mng) {
             sloped = false;
             slopeRotation = 0;
             position = pos;
             this.filled = filled;
             objects = new HashSet<LivingObject>();
-            
+            shape = Polygon.AABB(this, 0.5f, 0.5f);
         }
     }
 }

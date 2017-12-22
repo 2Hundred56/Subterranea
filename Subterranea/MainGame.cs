@@ -31,7 +31,7 @@ namespace Subterranea {
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
-        Rectangle mult(Rectangle r, float s) { // Scales rectangle by factor s
+        Rectangle Mult(Rectangle r, float s) { // Scales rectangle by factor s
             return new Rectangle((int)(r.X * s), (int)(r.Y * s), (int)(r.Width * s), (int)(r.Height * s));
 
         }
@@ -91,6 +91,13 @@ namespace Subterranea {
             pixel.SetData<Color>(new Color[] { Color.White });
             // TODO: use this.Content to load your game content here
             slope = Content.Load<Texture2D>("slope");
+            LivingObject olivia = new LivingObject(tileManager);
+            LivingObject olivia2 = new LivingObject(tileManager);
+            olivia2.SetPosition(new Vector2(0.1f, 0.1f));
+            Polygon rect = Polygon.AABB(olivia, 0.5f, 0.5f);
+            Polygon rect2 = Polygon.AABB(olivia2, 0.5f, 0.5f);
+           
+            System.Console.WriteLine(Physics.Overlapping(rect, rect2));
         }
 
         /// <summary>
@@ -140,7 +147,7 @@ namespace Subterranea {
 
                         }
                         else {
-                            DrawSprite(slope, new Bounding(i, j, 1,1), Color.SandyBrown,(int)tile.slopeRotation);
+                            DrawSprite(slope, new Bounding(i, j, 1,1), Color.SandyBrown,(int)tile.Slope);
 
 
 

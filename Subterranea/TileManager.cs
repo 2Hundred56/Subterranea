@@ -36,7 +36,7 @@ namespace Subterranea {
                 obj.Update(delta);
                 if (obj.collisionFlag) {
                     obj.collisionFlag = false;
-                    Rectangle bounds = obj.shape.getBounds();
+                    Rectangle bounds = obj.Shape.GetBounds();
                     foreach (Tile tile in obj.tiles) {
                         tile.Remove(obj);
                     }
@@ -44,11 +44,11 @@ namespace Subterranea {
                         for (int j = ((int)Math.Floor((decimal)bounds.Top)); j <= ((int)Math.Ceiling((decimal)bounds.Bottom)); j++) {
                             Tile tile = GetAt(i, j);
                             if (tile.Filled) {
-                                Physics.checkCollision(obj, tile);
+                                Physics.CheckCollision(obj, tile);
                             }
                             foreach (LivingObject coll in tile.objects) {
                                 if (!coll.collisionFlag) {
-                                    Physics.checkCollision(obj, coll);
+                                    Physics.CheckCollision(obj, coll);
                                 }
                             }
 
@@ -180,8 +180,7 @@ namespace Subterranea {
             }
             if (slope != null) {
                 Tile tile = GetAt(x, y);
-                tile.slopeRotation = (int)slope;
-                tile.sloped = true;
+                tile.Slope = (int)slope;
             }
 
 
