@@ -44,6 +44,10 @@
     <Compile Include="Bounding.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Global.cs" />
+    <Compile Include="LivingObject.cs" />
+    <Compile Include="PhysicsObject.cs" />
+    <Compile Include="Physics.cs" />
+    <Compile Include="Shape.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.manifest" />
