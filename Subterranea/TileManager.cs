@@ -100,7 +100,7 @@ namespace Subterranea {
                 for (int y = 0; y < MAPY; y++) {
                     int neighbors = 0;
                     foreach (int[] offset in sideOffsets) {
-                        if (GetAt(offset[0] + x, offset[1] + y) != null) {
+                        if (GetAt(offset[0] + x, offset[1] + y).Filled) {
                             neighbors++;
                         }
                     }
@@ -110,6 +110,7 @@ namespace Subterranea {
                 }
             }
             BatchSet(toRemove, false);
+          
         }
         public void Generate() {
             tiles = new Tile[MAPX, MAPY];
