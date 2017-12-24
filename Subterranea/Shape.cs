@@ -7,13 +7,14 @@ using Microsoft.Xna.Framework;
 namespace Subterranea {
     public abstract class Shape {
         public abstract Rectangle GetBounds();
-        protected PhysicsObject parent;
+        public PhysicsObject parent;
         public bool hard = false;
         public Vector2 Position {
             get => parent.Position;
         }
         public Shape(PhysicsObject parent) {
             this.parent = parent;
+            parent.Shape = this;
         }
         public abstract HashSet<Vector2> Axes(Vector2 otherPos);
         public abstract double[] GetMinMax(Vector2 axis);

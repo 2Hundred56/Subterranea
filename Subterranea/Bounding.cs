@@ -15,6 +15,12 @@ namespace Subterranea {
             this.Width = Width;
             this.Height = Height;
         }
+        public Bounding(Rectangle rect) {
+            this.X = rect.X;
+            this.Y = rect.Y;
+            this.Width = rect.Width;
+            this.Height = rect.Height;
+        }
         public Bounding Scaled(float s) {
             return new Bounding(X * s, Y * s, Width * s, Height * s);
         }

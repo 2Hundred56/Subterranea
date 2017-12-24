@@ -12,7 +12,7 @@ namespace Subterranea {
         public bool collisionFlag = false;
         public Vector2 velocity = new Vector2(0, 0);
 
-        public new Vector2 Position
+        public override Vector2 Position
         {
             get => position;
             set
@@ -42,16 +42,17 @@ namespace Subterranea {
         }
         public LivingObject(TileManager mng) : base(mng)
         {
+            tiles = new HashSet<Tile>();
         }
         public void Update(GameTime delta)
         {
-            velocity += Physics.gravity*(float)delta.ElapsedGameTime.TotalSeconds;
+            velocity += Global.gravity*(float)delta.ElapsedGameTime.TotalSeconds;
             Position += velocity * (float)delta.ElapsedGameTime.TotalSeconds;
 
         }
         public override void Collide(float bounce, float friction, Vector2 axis)
         {
-            velocity = Physics.Project(velocity, axis) * axis * bounce+Physics.Project(velocity, Physics.Rotate90(axis)) * Physics.Rotate90(axis) * friction;
+            velocity = Global.Project(velocity, axis) * axis * bounce+Global.Project(velocity, Global.Rotate90(axis)) * Global.Rotate90(axis) * friction;
             base.Collide(bounce, friction, axis);
         }
         }            

@@ -10,7 +10,7 @@ namespace Subterranea {
     public abstract class PhysicsObject {
         public float bounce = 0f;
         public float friction = 0.9f;
-        public Vector2 Position;
+        public abstract Vector2 Position { get; set; }
         protected TileManager manager;
         protected Shape shape;
         public bool noPenetration = false;

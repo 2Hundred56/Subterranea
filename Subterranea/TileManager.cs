@@ -44,11 +44,11 @@ namespace Subterranea {
                         for (int j = ((int)Math.Floor((decimal)bounds.Top)); j <= ((int)Math.Ceiling((decimal)bounds.Bottom)); j++) {
                             Tile tile = GetAt(i, j);
                             if (tile.Filled) {
-                                Physics.CheckCollision(obj, tile);
+                                Global.CheckCollision(obj, tile);
                             }
                             foreach (LivingObject coll in tile.objects) {
                                 if (!coll.collisionFlag) {
-                                    Physics.CheckCollision(obj, coll);
+                                    Global.CheckCollision(obj, coll);
                                 }
                             }
 
@@ -114,15 +114,18 @@ namespace Subterranea {
         }
         public void Generate() {
             tiles = new Tile[MAPX, MAPY];
-
+            System.Console.Write("Filling map");
 
             // First pass - Fill map
             for (int x = 0; x < MAPX; x++) {
+                System.Console.Write(".");
                 for (int y = 0; y < MAPY; y++) {
                     SetAt(x, y, true);
                 }
             }
-            // Second pass - Generate caves
+            System.Console.WriteLine("Done.");
+            System.Console.Write("Generating caves... ");
+            // Second pass - Generate caves;
             for (int x = 0; x < MAPX; x++) {
                 for (int y = 0; y < MAPY; y++) {
                     if (rand.Next(1, Global.CAVEINDEX) == 1) { // 1 in 50 tiles are seeded for caves
@@ -131,14 +134,15 @@ namespace Subterranea {
 
                 }
             }
-
+            System.Console.WriteLine("Done.");
+            System.Console.Write("Smoothing terrain... ");
             // Third pass - Remove floating and hanging blocks
             for (int i = 0; i < 5;i++) {
                 Smooth(2);
 
             }
             SetAt(0,0,false);
-
+            System.Console.WriteLine("Done.");
         }
         public void Expand(int x, int y, int life) { // Recursive function for generating caves
             Tile thisTile = GetAt(x, y);

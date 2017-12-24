@@ -54,10 +54,10 @@ namespace Subterranea {
                 }
                 //System.Console.WriteLine(point.ToString()+point2.ToString());
                 Vector2 edge = point - point2;
-                Vector2 normal = Physics.Rotate90(edge, 1);
+                Vector2 normal = Global.Rotate90(edge, 1);
                 
                 normals.Add(normal);
-                axes.Add(Physics.RefVector(normal));
+                axes.Add(Global.RefVector(normal));
                 if (point.X<minx) {
                     minx = (int) (point.X+0.5f);
                 }
@@ -78,8 +78,7 @@ namespace Subterranea {
             if (bounds==null) {
                 UpdatePoints(points);
             }
-            Rectangle rect = new Rectangle(bounds.X, bounds.Y, bounds.Width, bounds.Height);
-            rect.Offset(parent.Position);
+            Rectangle rect = new Rectangle((int) (bounds.X+parent.Position.X), (int) (bounds.Y+parent.Position.Y), bounds.Width, bounds.Height);
             return rect;
         }
 
@@ -94,7 +93,7 @@ namespace Subterranea {
             double min = 100;
             double max = -100;
             foreach (Vector2 point in points) {
-                double proj = Physics.Project(point+Position, axis);
+                double proj = Global.Project(point+Position, axis);
                 if (proj<min) {
                     min = proj;
                 }

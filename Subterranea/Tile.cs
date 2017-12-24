@@ -11,9 +11,12 @@ namespace Subterranea {
         protected int slopeRotation;
         protected bool filled = false;
         protected Vector2 position;
-        public new Vector2 Position
+        public override Vector2 Position
         {
             get => position;
+            set {
+                throw new FieldAccessException();
+            }
         }
         public bool isnull = false;
         public HashSet<LivingObject> objects;

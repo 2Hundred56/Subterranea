@@ -13,6 +13,7 @@ namespace Subterranea {
         TileManager tileManager;
         Texture2D pixel;
         Texture2D slope;
+        LivingObject olivia;
         public Vector2 camera = new Vector2(0, 0);
         public Vector2 cameraSize = new Vector2(40, 30);
         public int windowWidth = 1280;
@@ -91,9 +92,9 @@ namespace Subterranea {
             pixel.SetData<Color>(new Color[] { Color.White });
             // TODO: use this.Content to load your game content here
             slope = Content.Load<Texture2D>("slope");
-            LivingObject olivia = new LivingObject(tileManager);
+            olivia = new LivingObject(tileManager);
             Polygon rect = Polygon.AABB(olivia, 0.5f, 0.5f);
-            System.Console.WriteLine(olivia.Shape);
+            tileManager.Add(olivia);
         
         }
 
@@ -115,7 +116,6 @@ namespace Subterranea {
                 Exit();
             tileManager.Update(gameTime);
             // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
         /// <summary>
@@ -157,6 +157,7 @@ namespace Subterranea {
 
             }
             a++;
+            DrawSprite(pixel, new Bounding(new Rectangle(olivia.Position.ToPoint(), new Point(1,1))), Color.Red, 0);
             spriteBatch.End();
 
             // TODO: Add your drawing code here
