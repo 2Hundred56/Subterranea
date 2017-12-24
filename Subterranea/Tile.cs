@@ -55,6 +55,7 @@ namespace Subterranea {
                 sloped = true;
                 slopeRotation = value;
                 shape = Polygon.RightTriangle(this, value, 0.5f);
+                shape.hard = true;
             }
         }
         public Tile(TileManager mng, bool filled, Vector2 pos) : base(mng) {
@@ -64,6 +65,7 @@ namespace Subterranea {
             this.filled = filled;
             objects = new HashSet<LivingObject>();
             shape = Polygon.AABB(this, 0.5f, 0.5f);
+            shape.hard = true;
         }
     }
 }

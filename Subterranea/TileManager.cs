@@ -40,9 +40,13 @@ namespace Subterranea {
                     foreach (Tile tile in obj.tiles) {
                         tile.Remove(obj);
                     }
+                    
                     for (int i = ((int) Math.Floor((decimal) bounds.Left)); i<=((int)Math.Ceiling((decimal)bounds.Right)); i++) {
                         for (int j = ((int)Math.Floor((decimal)bounds.Top)); j <= ((int)Math.Ceiling((decimal)bounds.Bottom)); j++) {
                             Tile tile = GetAt(i, j);
+                            if (tile.isnull) {
+                                continue;
+                            }
                             if (tile.Filled) {
                                 Global.CheckCollision(obj, tile);
                             }
@@ -120,7 +124,7 @@ namespace Subterranea {
             for (int x = 0; x < MAPX; x++) {
                 System.Console.Write(".");
                 for (int y = 0; y < MAPY; y++) {
-                    SetAt(x, y, true);
+                    SetAt(x, y, y>=4?true:false);
                 }
             }
             System.Console.WriteLine("Done.");

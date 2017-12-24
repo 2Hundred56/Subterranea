@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace Subterranea {
     public abstract class PhysicsObject {
-        public float bounce = 0f;
+        public float bounce = 1f;
         public float friction = 0.9f;
         public abstract Vector2 Position { get; set; }
         protected TileManager manager;

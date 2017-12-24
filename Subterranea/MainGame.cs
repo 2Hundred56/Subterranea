@@ -115,6 +115,7 @@ namespace Subterranea {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             tileManager.Update(gameTime);
+            System.Console.WriteLine(olivia.Position);
             // TODO: Add your update logic here
             base.Update(gameTime);
         }
@@ -157,9 +158,8 @@ namespace Subterranea {
 
             }
             a++;
-            DrawSprite(pixel, new Bounding(new Rectangle(olivia.Position.ToPoint(), new Point(1,1))), Color.Red, 0);
+            DrawSprite(pixel, new Bounding(olivia.Position.X, olivia.Position.Y, olivia.Shape.GetBounds().Width, olivia.Shape.GetBounds().Height), Color.Red, 0);
             spriteBatch.End();
-
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);

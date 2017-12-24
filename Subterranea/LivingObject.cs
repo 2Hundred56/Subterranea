@@ -52,7 +52,9 @@ namespace Subterranea {
         }
         public override void Collide(float bounce, float friction, Vector2 axis)
         {
-            velocity = Global.Project(velocity, axis) * axis * bounce+Global.Project(velocity, Global.Rotate90(axis)) * Global.Rotate90(axis) * friction;
+            Vector2 proj = Global.Project(velocity, axis) * axis;
+            Vector2 proj2 = Global.Project(velocity, Global.Rotate90(axis)) * Global.Rotate90(axis);
+            velocity = -(Global.Project(velocity, axis) * axis * bounce)+Global.Project(velocity, Global.Rotate90(axis)) * Global.Rotate90(axis) * friction;
             base.Collide(bounce, friction, axis);
         }
         }            
