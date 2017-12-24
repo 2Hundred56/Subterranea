@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>/Users/sunlightiv/Subterranea/Subterranea/Content/slope.png</SourceFile>
-  <SourceTime>2017-12-20T18:44:26-05:00</SourceTime>
-  <DestFile>/Users/sunlightiv/Subterranea/Subterranea/Content/bin/DesktopGL/slope.xnb</DestFile>
+  <SourceFile>/Users/sunlightiv/Subterranea/Subterranea/Content/circle.png</SourceFile>
+  <SourceTime>2017-12-23T20:48:41-05:00</SourceTime>
+  <DestFile>/Users/sunlightiv/Subterranea/Subterranea/Content/bin/DesktopGL/circle.xnb</DestFile>
   <DestTime>2017-12-24T08:45:41-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T10:06:24-05:00</ImporterTime>

@@ -79,7 +79,7 @@ namespace Subterranea {
                 UpdatePoints(points);
             }
             Rectangle rect = new Rectangle(bounds.X, bounds.Y, bounds.Width, bounds.Height);
-            rect.Offset(parent.GetPosition());
+            rect.Offset(parent.Position);
             return rect;
         }
 

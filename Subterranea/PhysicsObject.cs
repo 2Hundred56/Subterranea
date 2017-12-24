@@ -8,8 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace Subterranea {
     public abstract class PhysicsObject {
-        public abstract Vector2 GetPosition();
-        public abstract void SetPosition(Vector2 pos);
+        public float bounce = 0f;
+        public float friction = 0.9f;
+        public Vector2 Position;
         protected TileManager manager;
         protected Shape shape;
         public bool noPenetration = false;
@@ -19,8 +20,8 @@ namespace Subterranea {
         public PhysicsObject(TileManager mng) {
             manager = mng;
         }
-        public void Update (GameTime delta) {
-
+        public virtual void Collide(float bounce, float friction, Vector2 axis) {
+            
         }
     }
 }

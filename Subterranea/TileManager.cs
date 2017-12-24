@@ -137,6 +137,7 @@ namespace Subterranea {
                 Smooth(2);
 
             }
+            SetAt(0,0,false);
 
         }
         public void Expand(int x, int y, int life) { // Recursive function for generating caves

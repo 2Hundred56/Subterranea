@@ -10,7 +10,7 @@ namespace Subterranea {
         protected PhysicsObject parent;
         public bool hard = false;
         public Vector2 Position {
-            get => parent.GetPosition();
+            get => parent.Position;
         }
         public Shape(PhysicsObject parent) {
             this.parent = parent;

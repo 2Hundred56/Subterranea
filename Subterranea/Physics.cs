@@ -7,9 +7,29 @@ using Microsoft.Xna.Framework;
 namespace Subterranea {
     public static class Physics {
         public static void CheckCollision(PhysicsObject o1, PhysicsObject o2) {
-
+            Vector2? overlap = Overlapping(o1.Shape, o2.Shape);
+            if (overlap==null) {
+                return;
+            }
+            else {
+                Vector2 o = (Vector2)overlap;
+                if (o1.Shape.hard) {    
+                    
+                    if (o2.Shape.hard) {
+                        o1.Position += 0.5f * o;
+                        o2.Position -= 0.5f * o;
+                    }
+                    else {
+                        o2.Position -= o;
+                    }
+                }
+                else if (o2.Shape.hard) {
+                    o1.Position += o;
+                }
+            }
         }
-        public static Vector2 Rotate90(Vector2 vector, int direction) => new Vector2(vector.Y * direction, -vector.X * direction); //+1 = counterclockwise, -1 = clockwise
+        public static Vector2 gravity;
+        public static Vector2 Rotate90(Vector2 vector, int direction=1) => new Vector2(vector.Y * direction, -vector.X * direction); //+1 = counterclockwise, -1 = clockwise
         public static Vector2 RefVector(Vector2 vector) => new Vector2(vector.Y==0?Math.Abs(vector.X):vector.X, Math.Abs(vector.Y));
         public static float Project(Vector2 vector, Vector2 axis) => Vector2.Dot(vector, axis / axis.Length());
         public static Vector2? Overlapping (Shape s1, Shape s2) {

@@ -5,12 +5,17 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Subterranea {
-    public class Tile : PhysicsObject {
+    public class Tile : PhysicsObject
+    {
         public bool sloped;
         protected int slopeRotation;
         protected bool filled = false;
+        protected Vector2 position;
+        public new Vector2 Position
+        {
+            get => position;
+        }
         public bool isnull = false;
-        protected Vector2 position = new Vector2(0, 0);
         public HashSet<LivingObject> objects;
         public new bool noPenetration = true;
         public void Add(LivingObject obj) {
@@ -29,7 +34,6 @@ namespace Subterranea {
             objects.Remove(obj);
 
         }
-        public override Vector2 GetPosition() => position;
         public void Fill() {
             filled = true;
         }
@@ -38,9 +42,6 @@ namespace Subterranea {
             filled = false;
         }
 
-        public override void SetPosition(Vector2 pos) {
-            throw new NotImplementedException();
-        }
 
         public Tile() : base(null){
             isnull = true;
