@@ -11,7 +11,6 @@ namespace Subterranea {
         public HashSet<Tile> tiles;
         public bool collisionFlag = false;
         public Vector2 velocity = new Vector2(0, 0);
-
         public override Vector2 Position
         {
             get => position;

@@ -13,7 +13,7 @@ namespace Subterranea {
         public static void CheckCollision(PhysicsObject o1, PhysicsObject o2) {
             Vector2? overlap = Overlapping(o1.Shape, o2.Shape);
 
-            if (overlap==null) {
+            if (overlap == null) {
                 return;
             }
             else {
@@ -29,8 +29,9 @@ namespace Subterranea {
                     }
                 }
                 else if (o2.Shape.hard) {
-                    o1.Collide(o2.bounce, o2.friction, o / o.Length());
                     o1.Position += o;
+                    o1.Collide(o2.bounce, o2.friction, o / o.Length());
+
                 }
             }
         }
@@ -63,7 +64,10 @@ namespace Subterranea {
                     minDist = dist;
                 }
             }
-            return minAxis / (float) minAxis.Length() * (float) minDist;
+            if (minDist == 0) {
+                return null;
+            }
+            return -( minAxis / (float) minAxis.Length() * (float) minDist );
 
         }
     }
