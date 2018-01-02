@@ -9,11 +9,12 @@ using Microsoft.Xna.Framework.Input;
 namespace Subterranea {
     public abstract class PhysicsObject {
         public float bounce = 0;
-        public float friction = 0.9f;
+        public float friction = 1f;
         public abstract Vector2 Position { get; set; }
         protected TileManager manager;
         protected Shape shape;
         public bool noPenetration = false;
+        public Vector2? collisionAxis = null;
 
         public Shape Shape { get => shape; set => shape = value; }
 

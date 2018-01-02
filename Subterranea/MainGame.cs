@@ -92,7 +92,7 @@ namespace Subterranea {
             pixel.SetData<Color>(new Color[] { Color.White });
             // TODO: use this.Content to load your game content here
             slope = Content.Load<Texture2D>("slope");
-            olivia = new LivingObject(tileManager);
+            olivia = new Player(tileManager);
             Polygon rect = Polygon.AABB(olivia, 0.5f, 0.5f);
             tileManager.Add(olivia);
         
@@ -115,7 +115,7 @@ namespace Subterranea {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             tileManager.Update(gameTime);
-            System.Console.WriteLine(olivia.Position);
+            
             // TODO: Add your update logic here
             base.Update(gameTime);
         }

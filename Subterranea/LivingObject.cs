@@ -43,7 +43,7 @@ namespace Subterranea {
         {
             tiles = new HashSet<Tile>();
         }
-        public void Update(GameTime delta)
+        public virtual void Update(GameTime delta)
         {
             velocity += Global.gravity*(float)delta.ElapsedGameTime.TotalSeconds;
             Position += velocity * (float)delta.ElapsedGameTime.TotalSeconds;

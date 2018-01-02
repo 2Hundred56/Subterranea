@@ -31,9 +31,19 @@ namespace Subterranea {
             nulltile = new Tile();
             objects = new HashSet<LivingObject>();
         }
+        public Vector2 GetInput() {
+            if (Keyboard.GetState().IsKeyDown(Keys.A)) {
+                return new Vector2(-1, 0);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.D)) {
+                return new Vector2(1, 0);
+            }
+            return new Vector2();
+        }
         public void Update(GameTime delta) {
             foreach (LivingObject obj in objects) {
                 obj.Update(delta);
+                obj.collisionAxis = null;
                 if (obj.collisionFlag) {
                     obj.collisionFlag = false;
                     Rectangle bounds = obj.Shape.GetBounds();
