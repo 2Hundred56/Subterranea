@@ -13,7 +13,7 @@ namespace Subterranea {
         public static Vector2? zero = new Vector2(0, 0);
         public abstract Vector2 Position { get; set; }
         protected TileManager manager;
-        protected Shape shape;
+        public Shape shape;
         public bool noPenetration = false;
         public Vector2? collisionAxis = null;
 

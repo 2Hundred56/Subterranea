@@ -92,7 +92,7 @@ namespace Subterranea {
             pixel.SetData<Color>(new Color[] { Color.White });
             // TODO: use this.Content to load your game content here
             slope = Content.Load<Texture2D>("slope");
-            olivia = new Player(tileManager, new Vector2(1.5f,0));
+            olivia = new Player(tileManager, new Vector2(16.5f,0));
             Polygon rect = Polygon.AABB(olivia, 0.5f, 0.5f);
             tileManager.Add(olivia);
         
@@ -148,7 +148,9 @@ namespace Subterranea {
                             DrawSprite(slope, new Bounding(i, j, 1,1), Color.SandyBrown,(int)tile.Slope);
 
 
-
+                            foreach (Vector2 point in (Polygon)(tile.Shape).points) {
+                                DrawSprite(pixel,new Bounding(point.X,point.Y,0.1f,0.1f),Color.Red,0);
+                            }
                         }
 
 

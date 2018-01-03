@@ -10,7 +10,7 @@ namespace Subterranea {
         private Rectangle bounds;
         private HashSet<Vector2> axes;
         public HashSet<Vector2> normals;
-        private Vector2[] points;
+        public Vector2[] points;
 
         public Polygon(PhysicsObject parent, Vector2[] points) : base(parent) {
             axes = new HashSet<Vector2>();
