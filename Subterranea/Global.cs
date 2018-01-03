@@ -21,23 +21,19 @@ namespace Subterranea {
             else {
                 Vector2 o = (Vector2)overlap;
                 if (o1.Shape.hard) {
-                    
+                    o2.SetCollisionAxis(-o);
                     o2.Collide(o1.bounce, o1.friction, o / o.Length());
                     if (o2.Shape.hard) {
                         o1.Position += 0.5f * o;
                         o2.Position -= 0.5f * o;
                     }
                     else {
-                        if (o.LengthSquared() < 0.01) {
-                            o2.collisionAxis = -o;
-                        }
+                        
                         o2.Position -= o;
                     }
                 }
                 else if (o2.Shape.hard) {
-                    if (o.LengthSquared() < 0.01) {
-                        o1.collisionAxis = o;
-                    }
+                    o1.SetCollisionAxis(o);
                     o1.Position += o;
                     o1.Collide(o2.bounce, o2.friction, o / o.Length());
                     if (((Tile) o2).sloped) {

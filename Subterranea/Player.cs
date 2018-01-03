@@ -28,7 +28,7 @@ namespace Subterranea {
                     if (Math.Abs(movement)>maxSpeed) {
                         movement = Math.Sign(movement) * maxSpeed;
                     }
-                  
+                    System.Console.WriteLine(axis);
                     velocity = Global.ProjectVec(velocity, (Vector2) collisionAxis)+axis*movement;
                     
                 }
