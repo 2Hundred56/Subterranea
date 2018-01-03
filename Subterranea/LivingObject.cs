@@ -9,7 +9,9 @@ namespace Subterranea {
     public class LivingObject : PhysicsObject {
         protected Vector2 position;
         public HashSet<Tile> tiles;
+
         public bool collisionFlag = false;
+
         public Vector2 velocity = new Vector2(0, 0);
         public override Vector2 Position
         {
@@ -39,9 +41,13 @@ namespace Subterranea {
             tiles.Remove(obj);
            
         }
-        public LivingObject(TileManager mng) : base(mng)
+        public LivingObject(TileManager mng, Vector2? pos = null) : base(mng)
         {
             tiles = new HashSet<Tile>();
+            if (pos == null) {
+                pos = PhysicsObject.zero;
+            }
+            Position = (Vector2)pos;
         }
         public virtual void Update(GameTime delta)
         {

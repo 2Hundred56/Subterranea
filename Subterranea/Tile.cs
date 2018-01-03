@@ -64,6 +64,7 @@ namespace Subterranea {
             position = pos;
             this.filled = filled;
             objects = new HashSet<LivingObject>();
+
             shape = Polygon.AABB(this, 0.5f, 0.5f);
             shape.hard = true;
         }

@@ -9,7 +9,11 @@ namespace Subterranea {
         public float movement = 0;
         public float acceleration = 0.25f;
         public float maxSpeed = 8f;
-        public Player(TileManager mng) : base(mng) {
+        public Player(TileManager mng, Vector2? pos = null) : base(mng) {
+            if (pos == null) {
+                pos = PhysicsObject.zero;
+            }
+            Position = (Vector2)pos;
         }
         public override void Update(GameTime delta){
             if (collisionAxis!=null) {

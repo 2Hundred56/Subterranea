@@ -9,7 +9,7 @@ namespace Subterranea {
         public const int MAPY = 1000; // Fixed size of map
         public Tile nulltile;
         public Tile[,] tiles; // Tile data: 0 - empty  1 - filled  2 - out of bounds
-        Random rand = new Random(); // RNG
+        Random rand = new Random(5); // RNG
         public int[][] sideOffsets = new int[][] {
             new int[] {1, 0},
             new int[] {0, 1},

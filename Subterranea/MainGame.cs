@@ -92,7 +92,7 @@ namespace Subterranea {
             pixel.SetData<Color>(new Color[] { Color.White });
             // TODO: use this.Content to load your game content here
             slope = Content.Load<Texture2D>("slope");
-            olivia = new Player(tileManager);
+            olivia = new Player(tileManager, new Vector2(1.5f,0));
             Polygon rect = Polygon.AABB(olivia, 0.5f, 0.5f);
             tileManager.Add(olivia);
         
