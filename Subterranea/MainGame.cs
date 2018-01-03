@@ -148,7 +148,7 @@ namespace Subterranea {
                             DrawSprite(slope, new Bounding(i, j, 1,1), Color.SandyBrown,(int)tile.Slope);
 
 
-                            foreach (Vector2 point in (Polygon)(tile.Shape).points) {
+                            foreach (Vector2 point in ((Polygon)(tile.Shape)).points) {
                                 DrawSprite(pixel,new Bounding(point.X,point.Y,0.1f,0.1f),Color.Red,0);
                             }
                         }
