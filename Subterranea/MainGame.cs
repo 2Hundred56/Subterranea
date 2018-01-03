@@ -69,14 +69,20 @@ namespace Subterranea {
             }
             return 0;
         }
-        public void DrawSprite(Texture2D tex, Bounding bounds, Color tint, float rot = 0) { // Draws a sprite in world space
-            Vector2 center = new Vector2(tex.Width / 2f, tex.Height / 2f);
+        public void DrawSprite(Texture2D tex, Bounding bounds, Color tint, float rot = 0, Vector2? _pivot=null) { // Draws a sprite in world space
+            Vector2 pivot;
+            if (_pivot==null) {
+                pivot = new Vector2(tex.Width / 2f, tex.Height / 2f);
+            } else {
+                pivot = (Vector2)_pivot;
+
+            }
             spriteBatch.Draw(tex,
-                             bounds.Scaled(ppu).Translated((-camera*ppu)).ToRectangle(),
+                             bounds.Scaled(ppu).Translated((-camera * ppu)).ToRectangle(),
                              null,
                              tint,
-                             rot*0.01745329251f,
-                             center,
+                             rot * 0.01745329251f,
+                             pivot,
                              SpriteEffects.None,
                              1
                             );
@@ -92,10 +98,10 @@ namespace Subterranea {
             pixel.SetData<Color>(new Color[] { Color.White });
             // TODO: use this.Content to load your game content here
             slope = Content.Load<Texture2D>("slope");
-            olivia = new Player(tileManager, new Vector2(16.5f,0));
+            olivia = new Player(tileManager, new Vector2(16.5f, 0));
             Polygon rect = Polygon.AABB(olivia, 0.5f, 0.5f);
             tileManager.Add(olivia);
-        
+
         }
 
         /// <summary>
@@ -115,7 +121,7 @@ namespace Subterranea {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             tileManager.Update(gameTime);
-            
+
             // TODO: Add your update logic here
             base.Update(gameTime);
         }
@@ -131,7 +137,7 @@ namespace Subterranea {
             float tileHeight = ppu;
             spriteBatch.Begin();
             for (int i = (int)camera.X; i <= camera.X + cameraSize.X; i++) {
-                
+
                 for (int j = (int)camera.Y; j <= camera.Y + cameraSize.Y; j++) {
 
                     Tile tile = tileManager.tiles[i, j];
@@ -141,15 +147,15 @@ namespace Subterranea {
                     else {
                         //spriteBatch.Draw(pixel, new Rectangle((int)((i - camera.X) * tileWidth), (int)((j - camera.Y) * tileHeight), (int)tileWidth, (int)tileHeight), Color.SandyBrown);
                         if (tile.sloped == false) {
-                            DrawSprite(pixel, new Bounding(i, j, 1, 1), Color.SandyBrown,0);
+                            DrawSprite(pixel, new Bounding(i, j, 1, 1), Color.SandyBrown, 0);
 
                         }
                         else {
-                            DrawSprite(slope, new Bounding(i, j, 1,1), Color.SandyBrown,(int)tile.Slope);
+                            DrawSprite(slope, new Bounding(i, j, 1, 1), Color.SandyBrown, (int)tile.Slope);
 
 
                             foreach (Vector2 point in ((Polygon)(tile.Shape)).points) {
-                                DrawSprite(pixel,new Bounding(point.X+i,point.Y+j,0.1f,0.1f),Color.Red,0);
+                                DrawSprite(pixel, new Bounding(point.X + i, point.Y + j, 0.1f, 0.1f), Color.Red, 0);
                             }
                         }
 
@@ -161,6 +167,10 @@ namespace Subterranea {
             }
             a++;
             DrawSprite(pixel, new Bounding(olivia.Position.X, olivia.Position.Y, olivia.Shape.GetBounds().Width, olivia.Shape.GetBounds().Height), Color.Red, 0);
+            DrawSprite(pixel, new Bounding(olivia.Position.X, olivia.Position.Y, 0.1f, olivia.velocity.Length()),
+                       Color.Green,
+                       (float)Math.Atan2(olivia.velocity.Y,olivia.velocity.X),
+                      new Vector2(0,0));
             spriteBatch.End();
             // TODO: Add your drawing code here
 
