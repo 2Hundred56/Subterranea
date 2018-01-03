@@ -22,13 +22,13 @@ namespace Subterranea {
         }
         public static Polygon RightTriangle(PhysicsObject parent, int rotation, float side) {
             List<Vector2> points = new List<Vector2>();
-            if (rotation != 90) {
+            if (rotation != 270) {
                 points.Add(new Vector2(-side, side));
             }
             if (rotation != 180) {
                 points.Add(new Vector2(side, side));
             }
-            if (rotation != 270) {
+            if (rotation != 90) {
                 points.Add(new Vector2(side, -side));
             }
             if (rotation != 0) {

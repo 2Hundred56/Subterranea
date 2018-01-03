@@ -149,7 +149,7 @@ namespace Subterranea {
 
 
                             foreach (Vector2 point in ((Polygon)(tile.Shape)).points) {
-                                DrawSprite(pixel,new Bounding(point.X,point.Y,0.1f,0.1f),Color.Red,0);
+                                DrawSprite(pixel,new Bounding(point.X+i,point.Y+j,0.1f,0.1f),Color.Red,0);
                             }
                         }
 
