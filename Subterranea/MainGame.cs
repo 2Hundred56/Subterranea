@@ -145,7 +145,6 @@ namespace Subterranea {
             for (int i = (int)camera.X; i <= camera.X + cameraSize.X; i++) {
 
                 for (int j = (int)camera.Y; j <= camera.Y + cameraSize.Y; j++) {
-
                     Tile tile = tileManager.tiles[i, j];
                     if (!tile.Filled) {
 
