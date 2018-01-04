@@ -18,24 +18,25 @@ namespace Subterranea {
             UpdatePoints(points);
         }
         public static Polygon AABB(PhysicsObject parent, float hx, float hy) { // Creates a rectangle collider
-            return new Polygon(parent, new Vector2[] { new Vector2(-hx, hy), new Vector2(hx, hy), new Vector2(hx, -hy), new Vector2(-hx, -hy) });
+            return new Polygon(parent, new Vector2[] { new Vector2(-hx, -hy), new Vector2(hx, -hy), new Vector2(hx, hy), new Vector2(-hx, hy) });
         }
         public static Polygon RightTriangle(PhysicsObject parent, int rotation, float side) {
             List<Vector2> points = new List<Vector2>();
-            if (rotation != 270) {
-                points.Add(new Vector2(-side, side));
-            }
-            if (rotation != 180) {
-                points.Add(new Vector2(side, side));
-            }
-            if (rotation != 90) {
-                points.Add(new Vector2(side, -side));
-            }
             if (rotation != 0) {
                 points.Add(new Vector2(-side, -side));
             }
             
-            
+            if (rotation != 90) {
+                points.Add(new Vector2(side, -side));
+            }
+            if (rotation != 180) {
+                points.Add(new Vector2(side, side));
+            }
+            if (rotation != 270) {
+                points.Add(new Vector2(-side, side));
+            }
+
+
             Polygon poly = new Polygon(parent, points.ToArray());
             return poly;
         }

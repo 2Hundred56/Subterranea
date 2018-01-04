@@ -25,23 +25,5 @@ namespace Subterranea {
         public virtual void Collide(float bounce, float friction, Vector2 axis) {
             
         }
-        public void SetCollisionAxis(Vector2 a) {
-            System.Console.WriteLine(a);
-            if (a.LengthSquared()<0.01) {
-                return;
-            }
-            Vector2 axis = a / a.Length();
-            System.Console.Write(axis);
-            System.Console.WriteLine(" "+collisionAxis.ToString());
-            if (collisionAxis==null) {
-                collisionAxis = axis;
-                return;
-            }
-            if (((Vector2) collisionAxis).Y<axis.Y) {
-                collisionAxis = axis;
-                return;
-            }
-
-        }
     }
 }

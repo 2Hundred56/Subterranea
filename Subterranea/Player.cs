@@ -16,28 +16,7 @@ namespace Subterranea {
             Position = (Vector2)pos;
         }
         public override void Update(GameTime delta){
-            if (collisionAxis!=null) {
-                Vector2 axis = Global.Rotate90((Vector2) collisionAxis);
-                if (axis.X<0) {
-                    axis = -axis;
-                }
-                axis = axis / axis.Length();
-                
-                if (axis.X != 0) {
-                    movement += acceleration * manager.GetInput().X;
-                    if (Math.Abs(movement)>maxSpeed) {
-                        movement = Math.Sign(movement) * maxSpeed;
-                    }
-                    System.Console.WriteLine(axis);
-                    velocity = Global.ProjectVec(velocity, (Vector2) collisionAxis)+axis*movement;
-                    
-                }
-                else {
-                    int a = 3;
-                }
-
-            }
-            base.Update(delta);
+            
         }
         public override void Collide(float bounce, float friction, Vector2 axis) {
             movement *= friction;

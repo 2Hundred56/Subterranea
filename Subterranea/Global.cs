@@ -21,7 +21,6 @@ namespace Subterranea {
             else {
                 Vector2 o = (Vector2)overlap;
                 if (o1.Shape.hard) {
-                    o2.SetCollisionAxis(-o);
                     o2.Collide(o1.bounce, o1.friction, o / o.Length());
                     if (o2.Shape.hard) {
                         o1.Position += 0.5f * o;
@@ -33,7 +32,6 @@ namespace Subterranea {
                     }
                 }
                 else if (o2.Shape.hard) {
-                    o1.SetCollisionAxis(o);
                     o1.Position += o;
                     o1.Collide(o2.bounce, o2.friction, o / o.Length());
                     if (((Tile) o2).sloped) {
@@ -43,10 +41,21 @@ namespace Subterranea {
             }
         }
         
-
+        
         public static Vector2 gravity = new Vector2(0, 9.8f);
         public static Vector2 Rotate90(Vector2 vector, int direction=1) => new Vector2(vector.Y * direction, -vector.X * direction); //+1 = counterclockwise, -1 = clockwise
-        public static Vector2 RefVector(Vector2 vector) => new Vector2(vector.Y==0?Math.Abs(vector.X):vector.X, Math.Abs(vector.Y));
+        public static Vector2 RefVector(Vector2 vector) {
+            if (vector.Y>0) {
+                return vector;
+            }
+            if (vector.Y == 0) {
+                return new Vector2(Math.Abs(vector.X),0);
+            }
+            if (vector.Y < 0) {
+                return -vector;
+            }
+            return vector;
+        }
         public static float Project(Vector2 vector, Vector2 axis) => Vector2.Dot(vector, axis / axis.Length());
         public static Vector2 ProjectVec(Vector2 vector, Vector2 axis) => axis/axis.Length()*Project(vector, axis);
         public static Vector2? Overlapping (Shape s1, Shape s2) {
@@ -77,7 +86,9 @@ namespace Subterranea {
             if (minDist == 0) {
                 return null;
             }
-            return -( minAxis / (float) minAxis.Length() * (float) minDist );
+            minAxis = minAxis / minAxis.Length();
+            minAxis = Global.RefVector(minAxis) * Math.Sign(Global.Project(s1.Position - s2.Position, minAxis));
+            return ( minAxis / (float) minAxis.Length() * (float) minDist );
 
         }
     }

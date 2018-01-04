@@ -154,16 +154,9 @@ namespace Subterranea {
                             DrawSprite(slope, new Bounding(i, j, 1, 1), Color.SandyBrown, (int)tile.Slope);
 
 
-                            foreach (Vector2 point in ((Polygon)(tile.Shape)).points) {
-                                DrawSprite(pixel, new Bounding(point.X + i, point.Y + j, 0.1f, 0.1f), Color.Red, 0);
-                            }
+                            
                         }
-                        foreach (Vector2 normal in ((Polygon)(tile.Shape)).normals) {
-                            DrawSprite(pixel, new Bounding(i, j, 0.1f, normal.Length()),
-                               Color.Blue,
-                               (float)Math.Atan2(normal.Y, normal.X),
-                              new Vector2(0, 0));
-                        }
+                        
 
 
                     }
@@ -173,10 +166,6 @@ namespace Subterranea {
             }
             a++;
             DrawSprite(pixel, new Bounding(olivia.Position.X, olivia.Position.Y, olivia.Shape.GetBounds().Width, olivia.Shape.GetBounds().Height), Color.Red, 0);
-            DrawSprite(pixel, new Bounding(olivia.Position.X, olivia.Position.Y, 0.1f, olivia.velocity.Length()),
-                       Color.Green,
-                       (float)Math.Atan2(olivia.velocity.Y,olivia.velocity.X),
-                      new Vector2(0,0));
             spriteBatch.End();
             // TODO: Add your drawing code here
 
