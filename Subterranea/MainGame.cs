@@ -151,11 +151,11 @@ namespace Subterranea {
                 
                 tileManager.Destroy((int) pos[0], (int) pos[1]);
             }
-            for (int i = (int)camera.X; i <= camera.X + cameraSize.X; i++) {
+            for (int i = (int)camera.X; i <= camera.X + cameraSize.X + 1; i++) {
 
-                for (int j = (int)camera.Y; j <= camera.Y + cameraSize.Y; j++) {
-                    Tile tile = tileManager.tiles[i, j];
-                    if (!tile.Filled) {
+                for (int j = (int)camera.Y; j <= camera.Y + cameraSize.Y + 1; j++) {
+                    Tile tile = tileManager.GetAt(i, j);
+                    if (tile.isnull || !tile.Filled) {
 
                     }
                     else {
