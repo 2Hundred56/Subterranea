@@ -4,6 +4,7 @@
   <SourceFile>C:/Users/ethan/Desktop/Subterranea/Subterranea/Content/circle.png</SourceFile>
   <SourceTime>2017-12-24T08:57:47.5300869-05:00</SourceTime>
   <DestFile>C:/Users/ethan/Desktop/Subterranea/Subterranea/Content/bin/DesktopGL/circle.xnb</DestFile>
+<<<<<<< HEAD
   <DestTime>2018-01-04T13:47:29.2393344-05:00</DestTime>
 =======
   <SourceFile>/Users/ianhuang/Desktop/Projects/Subterranea/Subterranea/Content/circle.png</SourceFile>
@@ -11,6 +12,9 @@
   <DestFile>/Users/ianhuang/Desktop/Projects/Subterranea/Subterranea/Content/bin/DesktopGL/circle.xnb</DestFile>
   <DestTime>2018-01-04T13:50:41-05:00</DestTime>
 >>>>>>> 98f46087c427e15b700adc556f37b28b751b64ce
+=======
+  <DestTime>2018-01-04T11:56:46.0059326-05:00</DestTime>
+>>>>>>> parent of 98bd36a... tweaks
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T10:06:24-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
