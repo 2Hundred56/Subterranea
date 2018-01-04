@@ -43,7 +43,7 @@ namespace Subterranea {
         public void Update(GameTime delta) {
             foreach (LivingObject obj in objects) {
                 obj.Update(delta);
-                obj.collisionAxis = null;
+                obj.LastCollision = null;
                 if (obj.collisionFlag) {
                     obj.collisionFlag = false;
                     Rectangle bounds = obj.Shape.GetBounds();

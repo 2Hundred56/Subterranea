@@ -166,6 +166,7 @@ namespace Subterranea {
             }
             a++;
             DrawSprite(pixel, new Bounding(olivia.Position.X, olivia.Position.Y, olivia.Shape.GetBounds().Width, olivia.Shape.GetBounds().Height), Color.Red, 0);
+            
             spriteBatch.End();
             // TODO: Add your drawing code here
 

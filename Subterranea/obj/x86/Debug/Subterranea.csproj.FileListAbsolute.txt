@@ -96,3 +96,4 @@ C:\Users\ethan\Desktop\Subterranea\Subterranea\bin\Debug\Subterranea.pdb
 C:\Users\ethan\Desktop\Subterranea\Subterranea\bin\Debug\MonoGame.Framework.dll
 C:\Users\ethan\Desktop\Subterranea\Subterranea\obj\x86\Debug\Subterranea.exe
 C:\Users\ethan\Desktop\Subterranea\Subterranea\obj\x86\Debug\Subterranea.pdb
+C:\Users\ethan\Desktop\Subterranea\Subterranea\obj\x86\Debug\Subterranea.csprojResolveAssemblyReference.cache

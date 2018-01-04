@@ -11,32 +11,28 @@ namespace Subterranea {
         public static int MAXCAVESIZE = 10;
         public static int ppu;
         public static void CheckCollision(PhysicsObject o1, PhysicsObject o2) {
-            Vector2? overlap = Overlapping(o1.Shape, o2.Shape);
-            if (((Tile)o2).sloped) {
-                int a = 3;
-            }
-            if (overlap == null) {
+            Collision collision = Overlapping(o1.Shape, o2.Shape);
+            if (collision == null) {
                 return;
             }
             else {
-                Vector2 o = (Vector2)overlap;
                 if (o1.Shape.hard) {
-                    o2.Collide(o1.bounce, o1.friction, o / o.Length());
+                    o2.Collide(o1.bounce, o1.friction, collision.axis);
+                    o2.LastCollision = collision;
                     if (o2.Shape.hard) {
-                        o1.Position += 0.5f * o;
-                        o2.Position -= 0.5f * o;
+                        o1.LastCollision = collision;
+                        o1.Collide(o2.bounce, o2.friction, collision.axis);
+                        o1.Position += 0.5f * collision.offset;
+                        o2.Position -= 0.5f * collision.offset;
                     }
                     else {
-                        
-                        o2.Position -= o;
+                        o2.Position -= collision.offset;
                     }
                 }
                 else if (o2.Shape.hard) {
-                    o1.Position += o;
-                    o1.Collide(o2.bounce, o2.friction, o / o.Length());
-                    if (((Tile) o2).sloped) {
-                        int a = 3;
-                    }
+                    o1.LastCollision = collision;
+                    o1.Position += collision.offset;
+                    o1.Collide(o2.bounce, o2.friction, collision.axis);
                 }
             }
         }
@@ -58,7 +54,7 @@ namespace Subterranea {
         }
         public static float Project(Vector2 vector, Vector2 axis) => Vector2.Dot(vector, axis / axis.Length());
         public static Vector2 ProjectVec(Vector2 vector, Vector2 axis) => axis/axis.Length()*Project(vector, axis);
-        public static Vector2? Overlapping (Shape s1, Shape s2) {
+        public static Collision Overlapping (Shape s1, Shape s2) {
             HashSet<Vector2> axes = new HashSet<Vector2>();
             axes.UnionWith(s1.Axes(s2.Position));
             axes.UnionWith(s2.Axes(s1.Position));
@@ -88,7 +84,7 @@ namespace Subterranea {
             }
             minAxis = minAxis / minAxis.Length();
             minAxis = Global.RefVector(minAxis) * Math.Sign(Global.Project(s1.Position - s2.Position, minAxis));
-            return ( minAxis / (float) minAxis.Length() * (float) minDist );
+            return new Collision(s1, s2, (float)minDist, minAxis);
 
         }
     }
