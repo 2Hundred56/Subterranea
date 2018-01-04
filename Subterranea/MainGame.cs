@@ -152,17 +152,10 @@ namespace Subterranea {
                         }
                         else {
                             DrawSprite(slope, new Bounding(i, j, 1, 1), Color.SandyBrown, (int)tile.Slope);
-
-
                             
                         }
-                        
-
-
                     }
-
                 }
-
             }
             a++;
             DrawSprite(pixel, new Bounding(olivia.Position.X, olivia.Position.Y, olivia.Shape.GetBounds().Width, olivia.Shape.GetBounds().Height), Color.Red, 0);
