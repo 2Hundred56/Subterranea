@@ -136,7 +136,7 @@ namespace Subterranea {
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime) {
-
+            camera = olivia.Position-cameraSize/2;
             GraphicsDevice.Clear(Color.Black);
 
             float tileWidth = ppu;
