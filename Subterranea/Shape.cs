@@ -8,7 +8,7 @@ namespace Subterranea {
     public abstract class Shape {
         public abstract Rectangle GetBounds();
         public PhysicsObject parent;
-        public bool hard = false;
+        public int hard = 0;
         public Vector2 Position {
             get => parent.Position;
         }

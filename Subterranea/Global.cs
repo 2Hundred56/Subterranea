@@ -16,20 +16,12 @@ namespace Subterranea {
                 return;
             }
             else {
-                if (o1.Shape.hard) {
+                if (o1.Shape.hard>o2.shape.hard) {
                     o2.Collide(o1.bounce, o1.friction, collision.axis);
                     o2.LastCollision = collision;
-                    if (o2.Shape.hard) {
-                        o1.LastCollision = collision;
-                        o1.Collide(o2.bounce, o2.friction, collision.axis);
-                        o1.Position += 0.5f * collision.offset;
-                        o2.Position -= 0.5f * collision.offset;
-                    }
-                    else {
-                        o2.Position -= collision.offset;
-                    }
+                    o2.Position -= collision.offset;
                 }
-                else if (o2.Shape.hard) {
+                else if (o2.Shape.hard>o1.shape.hard) {
                     o1.LastCollision = collision;
                     o1.Position += collision.offset;
                     o1.Collide(o2.bounce, o2.friction, collision.axis);

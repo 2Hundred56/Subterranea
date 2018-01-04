@@ -131,6 +131,10 @@ namespace Subterranea {
             // TODO: Add your update logic here
             base.Update(gameTime);
         }
+        public float[] ScreenToTile(Vector2 screenPos) {
+            Vector2 changeOne = screenPos / ppu + camera;
+            return new float[] { changeOne.X, changeOne.Y };
+        }
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -142,6 +146,11 @@ namespace Subterranea {
             float tileWidth = ppu;
             float tileHeight = ppu;
             spriteBatch.Begin();
+            float[] pos = ScreenToTile(Mouse.GetState().Position.ToVector2());
+            if (Mouse.GetState().LeftButton== ButtonState.Pressed) {
+                
+                tileManager.Destroy((int) pos[0], (int) pos[1]);
+            }
             for (int i = (int)camera.X; i <= camera.X + cameraSize.X; i++) {
 
                 for (int j = (int)camera.Y; j <= camera.Y + cameraSize.Y; j++) {
@@ -172,7 +181,7 @@ namespace Subterranea {
             }
             a++;
             DrawSprite(pixel, new Bounding(olivia.Position.X, olivia.Position.Y, olivia.Shape.GetBounds().Width, olivia.Shape.GetBounds().Height), Color.Red, 0);
-            
+            DrawSprite(pixel, new Bounding(pos[0], pos[1], 0.2f, 0.2f), Color.Red, 0);
             spriteBatch.End();
             // TODO: Add your drawing code here
 

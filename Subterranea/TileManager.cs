@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace Subterranea {
     public class TileManager {
+        public KeyboardState lastState;
         public const int MAPX = 1000; // Fixed size of map
         public const int MAPY = 1000; // Fixed size of map
         public Tile nulltile;
@@ -20,6 +21,9 @@ namespace Subterranea {
         public void Add(LivingObject obj) {
             objects.Add(obj);
             obj.collisionFlag = true;
+        }
+        public bool IsKeyPressed(Keys key) {
+            return Keyboard.GetState().IsKeyDown(key) && !lastState.IsKeyDown(key);
         }
         public void Remove(LivingObject obj) {
             objects.Remove(obj);
@@ -70,6 +74,7 @@ namespace Subterranea {
                     }
                 }
             }
+            lastState = Keyboard.GetState();
         }
         public static int Sign(float n) { // Taking code from Nested Dungeon's Player.cs
             if (n < 0) {
@@ -108,6 +113,7 @@ namespace Subterranea {
                 SetAt(tile[0],tile[1],value);
             }
         }
+        
         public void Smooth(int minNeighbors = 2) {
             List<int[]> toRemove = new List<int[]>();
             for (int x = 0; x < MAPX; x++) {
@@ -173,6 +179,13 @@ namespace Subterranea {
         }
         public bool IsTile(int x, int y) {
             return GetAt(x, y).Filled;
+        }
+        public void Destroy(int x, int y) {
+            SetAt(x, y, false);
+            UpdateTile(x - 1, y);
+            UpdateTile(x + 1, y);
+            UpdateTile(x, y - 1);
+            UpdateTile(x, y + 1);
         }
         public void UpdateTile(int x, int y) { // Apply normal to given tile
             if (!(GetAt(x, y).Filled)) {
