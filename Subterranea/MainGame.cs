@@ -69,6 +69,12 @@ namespace Subterranea {
             }
             return 0;
         }
+        public void DrawLine(Vector2 from, Vector2 to, Color tint, float thickness = 0.1f) {
+            Vector2 rotVector = (to - from);
+            DrawSprite(pixel, new Bounding(from.X, from.Y, rotVector.Length(), thickness),
+                       tint,
+                       (float)Math.Atan2(rotVector.Y, rotVector.X));
+        }
         public void DrawSprite(Texture2D tex, Bounding bounds, Color tint, float rot = 0, Vector2? _pivot=null) { // Draws a sprite in world space
             Vector2 pivot;
             if (_pivot==null) {
