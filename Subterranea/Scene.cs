@@ -12,8 +12,12 @@ namespace Subterranea {
         public List<Object> objects;
         public Scene() {
             objects = new List<Object>();
+<<<<<<< HEAD
             physicsManager = new PhysicsManager();
             tileManager = new TileManager(this);
+=======
+            tileManager = new TileManager();
+>>>>>>> parent of da43d68... dfsafadsafds
             inputManager = new InputManager();
 
         }
