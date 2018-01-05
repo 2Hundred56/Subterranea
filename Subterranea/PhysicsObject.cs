@@ -6,6 +6,8 @@ namespace Subterranea {
         public Vector2 velocity;
         public Vector2 force;
         public float mass;
+        public bool noForces;
+
         public float friction;
         public float bouncy;
         public void SetStatic() {
@@ -19,6 +21,11 @@ namespace Subterranea {
             velocity += (1 / mass * force) * dt;
             position += velocity * dt;
             force = new Vector2();
+        }
+        public void AddForce(Vector2 force) {
+            if (!noForces) {
+                this.force += force;
+            }
         }
     }
 }

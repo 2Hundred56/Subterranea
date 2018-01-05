@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 namespace Subterranea {
     public class PhysicsManager {
         public List<PhysicsObject> physicsObjects;
+        public Vector2 gravity = new Vector2(0, 9.8f);
         public PhysicsManager() {
             physicsObjects = new List<PhysicsObject>();
         }
@@ -14,9 +15,11 @@ namespace Subterranea {
             physicsObjects.Add(obj);
         }
         public void Update(GameTime delta) {
+            float dt = (float)delta.ElapsedGameTime.TotalSeconds;
             //Tag possible collisions
             //Solve collisions
             foreach (PhysicsObject physicsObject in physicsObjects) {
+                physicsObject.AddForce(gravity*dt);
                 physicsObject.PhysicsUpdate(delta);
             }
             //Fix penetration
