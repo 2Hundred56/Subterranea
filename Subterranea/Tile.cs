@@ -21,6 +21,7 @@ namespace Subterranea {
         public bool isnull = false;
         public HashSet<LivingObject> objects;
         public new bool noPenetration = true;
+
         public void Add(LivingObject obj) {
             objects.Add(obj);
             obj._Add(this);

@@ -152,7 +152,6 @@ namespace Subterranea {
                 tileManager.Destroy((int) pos[0], (int) pos[1]);
             }
             for (int i = (int)camera.X; i <= camera.X + cameraSize.X + 1; i++) {
-
                 for (int j = (int)camera.Y; j <= camera.Y + cameraSize.Y + 1; j++) {
                     Tile tile = tileManager.GetAt(i, j);
                     if (tile.isnull || !tile.Filled) {
@@ -167,16 +166,10 @@ namespace Subterranea {
                         else {
                             DrawSprite(slope, new Bounding(i, j, 1, 1), Color.SandyBrown, (int)tile.Slope);
 
-
-                            
                         }
-                        
-
 
                     }
-
                 }
-
             }
             a++;
             DrawSprite(pixel, new Bounding(olivia.Position.X, olivia.Position.Y, olivia.Shape.GetBounds().Width, olivia.Shape.GetBounds().Height), Color.Red, 0);

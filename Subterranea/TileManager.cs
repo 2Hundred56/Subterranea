@@ -11,7 +11,7 @@ namespace Subterranea {
         public Tile nulltile;
         public Tile[,] tiles; // Tile data: 0 - empty  1 - filled  2 - out of bounds
         Random rand = new Random(6); // RNG
-        public int[][] sideOffsets = new int[][] {
+        public static int[][] sideOffsets = new int[][] {
             new int[] {1, 0},
             new int[] {0, 1},
             new int[] {-1, 0},
@@ -229,6 +229,15 @@ namespace Subterranea {
             UpdateSlopes(new Rectangle(1, 1, MAPX - 1, MAPY - 1));
         }
 
-
+        public void NeighborsAt(int x, int y) {
+            int n = 0;
+            foreach (int[] offset in sideOffsets) {
+                if (GetAt(x,y).Filled) {
+                    n++;
+                }
+            }
+            return n;
+        }
     }
+
 }
