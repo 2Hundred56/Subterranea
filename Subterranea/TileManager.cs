@@ -181,13 +181,15 @@ namespace Subterranea {
         public bool IsTile(int x, int y) {
             return GetAt(x, y).Filled;
         }
-        public void Destroy(int x, int y) {
-            SetAt(x, y, false);
+        public bool Destroy(int x, int y) {
+            bool success = SetAt(x, y, false);
             UpdateTile(x - 1, y);
             UpdateTile(x + 1, y);
             UpdateTile(x, y - 1);
             UpdateTile(x, y + 1);
+            return success;
         }
+
         public void UpdateTile(int x, int y) { // Apply normal to given tile
             if (!(GetAt(x, y).Filled)) {
                 return;

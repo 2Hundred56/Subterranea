@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 using System;
 
 namespace Subterranea {
@@ -26,6 +27,7 @@ namespace Subterranea {
             Content.RootDirectory = "Content";
             tileManager = new TileManager();
         }
+        List<LivingObject> rubble;
         float a = 0;
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -46,6 +48,7 @@ namespace Subterranea {
             base.Initialize();
             tileManager.Generate();
             tileManager.UpdateSlopes();
+            rubble = new List<LivingObject>();
 
         }
         public static float NormalToRotation(Vector2 nrm) {
@@ -149,6 +152,10 @@ namespace Subterranea {
             Vector2 changeOne = screenPos / ppu + camera;
             return new float[] { changeOne.X, changeOne.Y };
         }
+        public Vector2 ScreenToWorld(Vector2 screenPos) {
+            Vector2 changeOne = screenPos / ppu + camera;
+            return new Vector2( changeOne.X, changeOne.Y );
+        }
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -160,10 +167,18 @@ namespace Subterranea {
             float tileWidth = ppu;
             float tileHeight = ppu;
             spriteBatch.Begin();
-            float[] pos = ScreenToTile(Mouse.GetState().Position.ToVector2());
+            Vector2 screenPos = Mouse.GetState().Position.ToVector2();
+            float[] pos = ScreenToTile(screenPos);
             if (Mouse.GetState().LeftButton== ButtonState.Pressed) {
-                
-                tileManager.Destroy((int) pos[0], (int) pos[1]);
+                if (tileManager.GetAt((int)pos[0],(int)pos[1]).Filled) {
+                    tileManager.Destroy((int)pos[0], (int)pos[1]);
+                    LivingObject rubbleParticle = new LivingObject(tileManager, new Vector2((int)pos[0], (int)pos[1]));
+                    Polygon rect = Polygon.AABB(rubbleParticle, 0.2f, 0.2f);
+                    tileManager.Add(rubbleParticle);
+                    rubble.Add(rubbleParticle);
+
+                }
+
             }
             for (int i = (int)camera.X; i <= camera.X + cameraSize.X + 1; i++) {
                 for (int j = (int)camera.Y; j <= camera.Y + cameraSize.Y + 1; j++) {
@@ -191,6 +206,14 @@ namespace Subterranea {
             a++;
             DrawSprite(pixel, new Bounding(olivia.Position.X, olivia.Position.Y, olivia.Shape.GetBounds().Width, olivia.Shape.GetBounds().Height), Color.Red, 0);
             DrawSprite(pixel, new Bounding(pos[0], pos[1], 0.2f, 0.2f), Color.Red, 0);
+            foreach (LivingObject particle in rubble) {
+                float radius = particle.Shape.GetBounds().Width/2f;
+                DrawCircle(new Vector2(particle.Position.X,
+                                              particle.Position.Y),
+                           radius:0.2f,
+                           tint:Color.Red);
+            }
+
             spriteBatch.End();
             // TODO: Add your drawing code here
 
