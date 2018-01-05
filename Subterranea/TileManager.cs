@@ -10,6 +10,7 @@ namespace Subterranea {
         public Tile nulltile;
         public Tile[,] tiles; // Tile data: 0 - empty  1 - filled  2 - out of bounds
         Random rand = new Random(6); // RNG
+        PhysicsManager pmanager;
         public static int[][] sideOffsets = new int[][] {
             new int[] {1, 0},
             new int[] {0, 1},
@@ -19,8 +20,9 @@ namespace Subterranea {
         public void Update(GameTime delta) {
 
         }
-        public TileManager() {
+        public TileManager(MainGame game) {
             nulltile = new Tile();
+            pmanager = game.scene.physicsManager;
         }
         public Vector2 GetInput() {
             if (Keyboard.GetState().IsKeyDown(Keys.A)) {
@@ -54,7 +56,18 @@ namespace Subterranea {
             if (IsOutside(x, y)) {
                 return false;
             }
-            tiles[x, y] = new Tile(this, filled, new Vector2(x, y));
+            Tile newtile = new Tile(this, filled, new Vector2(x, y));
+            if (filled) {
+                pmanager.physicsObjects.Add(newtile);
+            }
+            else {
+                Tile occupying = GetAt(x, y);
+                if (pmanager.physicsObjects.Contains(occupying)) {
+                    pmanager.physicsObjects.Remove(occupying);
+                }
+            }
+            tiles[x, y] = newtile;
+
 
             return true;
         }
