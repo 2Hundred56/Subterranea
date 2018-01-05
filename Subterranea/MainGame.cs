@@ -21,6 +21,9 @@ namespace Subterranea {
         Vector2 pivot = new Vector2(0.5f);
         const float root2 = 1.41421356237f;
         public float ppu; // Pixels per unit, assuming square world scaling
+
+        public Texture2D[] spriteTable;
+
         public MainGame() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -117,6 +120,8 @@ namespace Subterranea {
             // TODO: use this.Content to load your game content here
             slope = Content.Load<Texture2D>("slope");
             circle = Content.Load<Texture2D>("circle");
+
+            spriteTable = new Texture2D[] { slope, circle };
         }
 
         /// <summary>
