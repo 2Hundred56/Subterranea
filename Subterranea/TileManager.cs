@@ -66,23 +66,7 @@ namespace Subterranea {
             if (IsOutside(x, y)) {
                 return false;
             }
-<<<<<<< HEAD
-            Tile newtile = new Tile(this, filled, new Vector2(x, y));
-            if (filled) {
-                pmanager.physicsObjects.Add(newtile);
-            }
-            else {
-                Tile occupying = GetAt(x, y);
-                if (pmanager.physicsObjects.Contains(occupying)) {
-                    pmanager.physicsObjects.Remove(occupying);
-                }
-            }
-            tiles[x, y] = newtile;
-
-=======
             tiles[x, y] = new Tile(this, filled, new Vector2(x, y));
->>>>>>> parent of 5d61e7a... Add and remove
-
             return true;
         }
         public Tile GetAt(int x, int y) { // Returns 2 if out of bounds
