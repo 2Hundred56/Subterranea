@@ -11,7 +11,7 @@ namespace Subterranea {
     public class MainGame : Game {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        public Scene scene;
+        Scene scene;
         Texture2D pixel;
         Texture2D slope;
         Texture2D circle;
