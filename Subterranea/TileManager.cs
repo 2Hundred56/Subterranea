@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace Subterranea {
     public class TileManager {
-        public KeyboardState lastState;
         public const int MAPX = 1000; // Fixed size of map
         public const int MAPY = 1000; // Fixed size of map
         public Tile nulltile;
@@ -17,8 +16,8 @@ namespace Subterranea {
             new int[] {-1, 0},
             new int[] {0, -1}
         }; // Tile offsets for side-neighboring tiles
-        public bool IsKeyPressed(Keys key) {
-            return Keyboard.GetState().IsKeyDown(key) && !lastState.IsKeyDown(key);
+        public void Update(GameTime delta) {
+
         }
         public TileManager() {
             nulltile = new Tile();
@@ -32,9 +31,7 @@ namespace Subterranea {
             }
             return new Vector2();
         }
-        public void Update(GameTime delta) {
-            lastState = Keyboard.GetState();
-        }
+        
         public static int Sign(float n) { // Taking code from Nested Dungeon's Player.cs
             if (n < 0) {
                 return -1;

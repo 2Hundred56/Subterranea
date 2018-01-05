@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
 namespace Subterranea {
-    public class Polygon : Shape {
+    public class Polygon{
         private Rectangle bounds;
         private HashSet<Vector2> axes;
         public HashSet<Vector2> normals;
         public Vector2[] points;
-
-        public Polygon(Vector2[] points) : base() {
+        public Vector2 Position;
+        public Polygon(Vector2[] points){
             axes = new HashSet<Vector2>();
             normals = new HashSet<Vector2>();
             UpdatePoints(points);
@@ -78,22 +78,14 @@ namespace Subterranea {
             bounds = new Rectangle(minx, miny, maxx - minx, maxy - miny);
             this.points = points;
         }
-        public override Rectangle GetBounds() {
-            if (bounds==null) {
-                UpdatePoints(points);
-            }
-            Rectangle rect = new Rectangle((int) (bounds.X+Position.X), (int) (bounds.Y+Position.Y), bounds.Width, bounds.Height);
-            return rect;
-        }
-
-        public override HashSet<Vector2> Axes(Vector2 otherPos) {
+        public HashSet<Vector2> Axes(Vector2 otherPos) {
             if (axes==null) {
                 UpdatePoints(points);
             }
             return axes;
         }
 
-        public override double[] GetMinMax(Vector2 axis) {
+        public double[] GetMinMax(Vector2 axis) {
             double min = 100;
             double max = -100;
             foreach (Vector2 point in points) {

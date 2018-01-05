@@ -5,15 +5,15 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Subterranea {
-    public class Tile
+    public class Tile : PhysicsObject
     {
         public bool sloped;
         protected int slopeRotation;
         protected bool filled = false;
-        protected Vector2 position;
-        public Vector2 Position
+        protected Vector2 _position;
+        public Vector2 position
         {
-            get => position;
+            get => _position;
             set {
                 throw new FieldAccessException();
             }
@@ -41,7 +41,7 @@ namespace Subterranea {
         public Tile(TileManager mng, bool filled, Vector2 pos) {
             sloped = false;
             slopeRotation = 0;
-            position = pos;
+            _position = pos;
             this.filled = filled;
         }
     }

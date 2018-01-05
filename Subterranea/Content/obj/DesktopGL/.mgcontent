@@ -4,7 +4,7 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>/Users/sunlightiv/Subterranea/Subterranea/Content/circle.png</File>
-    <File>/Users/sunlightiv/Subterranea/Subterranea/Content/slope.png</File>
+    <File>C:/Users/ethan/Desktop/Subterranea/Subterranea/Content/circle.png</File>
+    <File>C:/Users/ethan/Desktop/Subterranea/Subterranea/Content/slope.png</File>
   </SourceFiles>
 </SourceFileCollection>

@@ -11,7 +11,7 @@ namespace Subterranea {
     public class MainGame : Game {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        TileManager tileManager;
+        Scene scene;
         Texture2D pixel;
         Texture2D slope;
         Texture2D circle;
@@ -24,7 +24,7 @@ namespace Subterranea {
         public MainGame() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            tileManager = new TileManager();
+            scene = new Scene();
         }
         float a = 0;
         /// <summary>
@@ -44,8 +44,8 @@ namespace Subterranea {
             graphics.ApplyChanges();
             ppu = GraphicsDevice.Viewport.Width / cameraSize.X;
             base.Initialize();
-            tileManager.Generate();
-            tileManager.UpdateSlopes();
+            scene.tileManager.Generate();
+            scene.tileManager.UpdateSlopes();
         }
         public static float NormalToRotation(Vector2 nrm) {
             float opp = nrm.Y;
@@ -135,7 +135,7 @@ namespace Subterranea {
         protected override void Update(GameTime gameTime) {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            tileManager.Update(gameTime);
+            scene.Update(gameTime);
 
             // TODO: Add your update logic here
             base.Update(gameTime);
@@ -161,14 +161,14 @@ namespace Subterranea {
             Vector2 screenPos = Mouse.GetState().Position.ToVector2();
             float[] pos = ScreenToTile(screenPos);
             if (Mouse.GetState().LeftButton== ButtonState.Pressed) {
-                if (tileManager.GetAt((int)pos[0],(int)pos[1]).Filled) {
-                    tileManager.Destroy((int)pos[0], (int)pos[1]);
+                if (scene.tileManager.GetAt((int)pos[0],(int)pos[1]).Filled) {
+                    scene.tileManager.Destroy((int)pos[0], (int)pos[1]);
                 }
 
             }
             for (int i = (int)camera.X; i <= camera.X + cameraSize.X + 1; i++) {
                 for (int j = (int)camera.Y; j <= camera.Y + cameraSize.Y + 1; j++) {
-                    Tile tile = tileManager.GetAt(i, j);
+                    Tile tile = scene.tileManager.GetAt(i, j);
                     if (tile.isnull || !tile.Filled) {
 
                     }
@@ -182,7 +182,7 @@ namespace Subterranea {
                             DrawSprite(slope, new Bounding(i, j, 1, 1), Color.SandyBrown, (int)tile.Slope);
 
                         }
-                        if (tileManager.NeighborsAt(i, j) != 4) {
+                        if (scene.tileManager.NeighborsAt(i, j) != 4) {
                             
                         }
 
