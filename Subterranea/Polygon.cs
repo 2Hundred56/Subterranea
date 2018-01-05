@@ -12,15 +12,15 @@ namespace Subterranea {
         public HashSet<Vector2> normals;
         public Vector2[] points;
 
-        public Polygon(PhysicsObject parent, Vector2[] points) : base(parent) {
+        public Polygon(Vector2[] points) : base() {
             axes = new HashSet<Vector2>();
             normals = new HashSet<Vector2>();
             UpdatePoints(points);
         }
-        public static Polygon AABB(PhysicsObject parent, float hx, float hy) { // Creates a rectangle collider
-            return new Polygon(parent, new Vector2[] { new Vector2(-hx, -hy), new Vector2(hx, -hy), new Vector2(hx, hy), new Vector2(-hx, hy) });
+        public static Polygon AABB(float hx, float hy) { // Creates a rectangle collider
+            return new Polygon(new Vector2[] { new Vector2(-hx, -hy), new Vector2(hx, -hy), new Vector2(hx, hy), new Vector2(-hx, hy) });
         }
-        public static Polygon RightTriangle(PhysicsObject parent, int rotation, float side) {
+        public static Polygon RightTriangle(int rotation, float side) {
             List<Vector2> points = new List<Vector2>();
             if (rotation != 0) {
                 points.Add(new Vector2(-side, -side));
@@ -37,7 +37,7 @@ namespace Subterranea {
             }
 
 
-            Polygon poly = new Polygon(parent, points.ToArray());
+            Polygon poly = new Polygon(points.ToArray());
             return poly;
         }
         public void UpdatePoints(Vector2[] points) {
@@ -82,7 +82,7 @@ namespace Subterranea {
             if (bounds==null) {
                 UpdatePoints(points);
             }
-            Rectangle rect = new Rectangle((int) (bounds.X+parent.Position.X), (int) (bounds.Y+parent.Position.Y), bounds.Width, bounds.Height);
+            Rectangle rect = new Rectangle((int) (bounds.X+Position.X), (int) (bounds.Y+Position.Y), bounds.Width, bounds.Height);
             return rect;
         }
 

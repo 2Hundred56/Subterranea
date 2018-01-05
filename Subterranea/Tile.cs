@@ -5,13 +5,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Subterranea {
-    public class Tile : PhysicsObject
+    public class Tile
     {
         public bool sloped;
         protected int slopeRotation;
         protected bool filled = false;
         protected Vector2 position;
-        public override Vector2 Position
+        public Vector2 Position
         {
             get => position;
             set {
@@ -19,25 +19,6 @@ namespace Subterranea {
             }
         }
         public bool isnull = false;
-        public HashSet<LivingObject> objects;
-        public new bool noPenetration = true;
-
-        public void Add(LivingObject obj) {
-            objects.Add(obj);
-            obj._Add(this);
-        }
-        public void Remove(LivingObject obj) {
-            objects.Remove(obj);
-            obj._Remove(this);
-        }
-        public void _Add(LivingObject obj) {
-            objects.Add(obj);
-
-        }
-        public void _Remove(LivingObject obj) {
-            objects.Remove(obj);
-
-        }
         public void Fill() {
             filled = true;
         }
@@ -47,7 +28,7 @@ namespace Subterranea {
         }
 
 
-        public Tile() : base(null){
+        public Tile() {
             isnull = true;
         }
         public int Slope {
@@ -55,19 +36,13 @@ namespace Subterranea {
             set {
                 sloped = true;
                 slopeRotation = value;
-                shape = Polygon.RightTriangle(this, value, 0.5f);
-                shape.hard = 5;
             }
         }
-        public Tile(TileManager mng, bool filled, Vector2 pos) : base(mng) {
+        public Tile(TileManager mng, bool filled, Vector2 pos) {
             sloped = false;
             slopeRotation = 0;
             position = pos;
             this.filled = filled;
-            objects = new HashSet<LivingObject>();
-
-            shape = Polygon.AABB(this, 0.5f, 0.5f);
-            shape.hard = 5;
         }
     }
 }

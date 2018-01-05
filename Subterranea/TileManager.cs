@@ -17,23 +17,11 @@ namespace Subterranea {
             new int[] {-1, 0},
             new int[] {0, -1}
         }; // Tile offsets for side-neighboring tiles
-        private HashSet<LivingObject> objects;
-        public void Add(LivingObject obj) {
-            objects.Add(obj);
-            obj.collisionFlag = true;
-        }
         public bool IsKeyPressed(Keys key) {
             return Keyboard.GetState().IsKeyDown(key) && !lastState.IsKeyDown(key);
         }
-        public void Remove(LivingObject obj) {
-            objects.Remove(obj);
-            foreach (Tile tile in obj.tiles) {
-                tile.Remove(obj);
-            }
-        }
         public TileManager() {
             nulltile = new Tile();
-            objects = new HashSet<LivingObject>();
         }
         public Vector2 GetInput() {
             if (Keyboard.GetState().IsKeyDown(Keys.A)) {
@@ -45,35 +33,6 @@ namespace Subterranea {
             return new Vector2();
         }
         public void Update(GameTime delta) {
-            foreach (LivingObject obj in objects) {
-                obj.Update(delta);
-                obj.LastCollision = null;
-                if (obj.collisionFlag) {
-                    obj.collisionFlag = false;
-                    Rectangle bounds = obj.Shape.GetBounds();
-                    foreach (Tile tile in obj.tiles) {
-                        tile.Remove(obj);
-                    }
-                    
-                    for (int i = ((int) Math.Floor((decimal) bounds.Left)); i<=((int)Math.Ceiling((decimal)bounds.Right)); i++) {
-                        for (int j = ((int)Math.Floor((decimal)bounds.Top)); j <= ((int)Math.Ceiling((decimal)bounds.Bottom)); j++) {
-                            Tile tile = GetAt(i, j);
-                            if (tile.isnull) {
-                                continue;
-                            }
-                            if (tile.Filled) {
-                                Global.CheckCollision(obj, tile);
-                            }
-                            foreach (LivingObject coll in tile.objects) {
-                                if (!coll.collisionFlag) {
-                                    Global.CheckCollision(obj, coll);
-                                }
-                            }
-
-                        }
-                    }
-                }
-            }
             lastState = Keyboard.GetState();
         }
         public static int Sign(float n) { // Taking code from Nested Dungeon's Player.cs
@@ -195,7 +154,9 @@ namespace Subterranea {
                 return;
             }
             int? slope = null;
-
+            if (!IsTile(x+1, y) && !IsTile(x-1, y) && !IsTile(x, y-1) && !IsTile(x, y+1)) {
+                Destroy(x, y);
+            }
             if (IsTile(x + 1, y) && !IsTile(x - 1, y)) {
                 if (IsTile(x, y + 1) && !IsTile(x, y - 1)) {
                     slope = 0;

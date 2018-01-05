@@ -10,25 +10,7 @@ namespace Subterranea {
         public static int MINCAVESIZE = 3;
         public static int MAXCAVESIZE = 10;
         public static int ppu;
-        public static void CheckCollision(PhysicsObject o1, PhysicsObject o2) {
-            Collision collision = Overlapping(o1.Shape, o2.Shape);
-            if (collision == null) {
-                return;
-            }
-            else {
-                if (o1.Shape.hard>o2.shape.hard) {
-                    o2.Collide(o1.bounce, o1.friction, collision.axis);
-                    o2.LastCollision = collision;
-                    o2.Position -= collision.offset;
-                }
-                else if (o2.Shape.hard>o1.shape.hard) {
-                    o1.LastCollision = collision;
-                    o1.Position += collision.offset;
-                    o1.Collide(o2.bounce, o2.friction, collision.axis);
-                }
-            }
-        }
-        
+       
         
         public static Vector2 gravity = new Vector2(0, 9.8f);
         public static Vector2 Rotate90(Vector2 vector, int direction=1) => new Vector2(vector.Y * direction, -vector.X * direction); //+1 = counterclockwise, -1 = clockwise

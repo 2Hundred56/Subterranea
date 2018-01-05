@@ -15,7 +15,6 @@ namespace Subterranea {
         Texture2D pixel;
         Texture2D slope;
         Texture2D circle;
-        LivingObject olivia;
         public Vector2 camera = new Vector2(0, 0);
         public Vector2 cameraSize = new Vector2(40, 30);
         public int windowWidth = 1280;
@@ -27,7 +26,6 @@ namespace Subterranea {
             Content.RootDirectory = "Content";
             tileManager = new TileManager();
         }
-        List<LivingObject> rubble;
         float a = 0;
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -48,8 +46,6 @@ namespace Subterranea {
             base.Initialize();
             tileManager.Generate();
             tileManager.UpdateSlopes();
-            rubble = new List<LivingObject>();
-
         }
         public static float NormalToRotation(Vector2 nrm) {
             float opp = nrm.Y;
@@ -121,10 +117,6 @@ namespace Subterranea {
             // TODO: use this.Content to load your game content here
             slope = Content.Load<Texture2D>("slope");
             circle = Content.Load<Texture2D>("circle");
-            olivia = new Player(tileManager, new Vector2(16.5f, 0));
-            Polygon rect = Polygon.AABB(olivia, 0.5f, 0.5f);
-            tileManager.Add(olivia);
-
         }
 
         /// <summary>
@@ -161,7 +153,6 @@ namespace Subterranea {
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime) {
-            camera = olivia.Position-cameraSize/2;
             GraphicsDevice.Clear(Color.Black);
 
             float tileWidth = ppu;
@@ -172,11 +163,6 @@ namespace Subterranea {
             if (Mouse.GetState().LeftButton== ButtonState.Pressed) {
                 if (tileManager.GetAt((int)pos[0],(int)pos[1]).Filled) {
                     tileManager.Destroy((int)pos[0], (int)pos[1]);
-                    LivingObject rubbleParticle = new LivingObject(tileManager, new Vector2((int)pos[0], (int)pos[1]));
-                    Polygon rect = Polygon.AABB(rubbleParticle, 0.2f, 0.2f);
-                    tileManager.Add(rubbleParticle);
-                    rubble.Add(rubbleParticle);
-
                 }
 
             }
@@ -204,16 +190,7 @@ namespace Subterranea {
                 }
             }
             a++;
-            DrawSprite(pixel, new Bounding(olivia.Position.X, olivia.Position.Y, olivia.Shape.GetBounds().Width, olivia.Shape.GetBounds().Height), Color.Red, 0);
             DrawSprite(pixel, new Bounding(pos[0], pos[1], 0.2f, 0.2f), Color.Red, 0);
-            foreach (LivingObject particle in rubble) {
-                float radius = particle.Shape.GetBounds().Width/2f;
-                DrawCircle(new Vector2(particle.Position.X,
-                                              particle.Position.Y),
-                           radius:0.2f,
-                           tint:Color.Red);
-            }
-
             spriteBatch.End();
             // TODO: Add your drawing code here
 

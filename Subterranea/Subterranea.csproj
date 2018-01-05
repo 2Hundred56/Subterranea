@@ -38,7 +38,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collision.cs" />
-    <Compile Include="Player.cs" />
     <Compile Include="Polygon.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -46,8 +45,6 @@
     <Compile Include="TileManager.cs" />
     <Compile Include="Bounding.cs" />
     <Compile Include="Tile.cs" />
-    <Compile Include="LivingObject.cs" />
-    <Compile Include="PhysicsObject.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Shape.cs" />
   </ItemGroup>
