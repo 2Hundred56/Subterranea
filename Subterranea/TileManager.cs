@@ -52,25 +52,31 @@ namespace Subterranea {
         public bool IsOutside(int x, int y) { // Shortcut
             return !IsValid(x, y);
         }
-        public bool SetAt(int x, int y, bool filled) { // Safe setter method. Returns false if unsuccessful, but will not crash
+        public bool SetAt(int x, int y, bool filled, bool updatePhysics = false) { // Safe setter method. Returns false if unsuccessful, but will not crash
             if (IsOutside(x, y)) {
                 return false;
             }
             Tile newtile = new Tile(this, filled, new Vector2(x, y));
-            if (filled) {
-                pmanager.physicsObjects.Add(newtile);
-            }
-            else {
-                Tile occupying = GetAt(x, y);
-                if (pmanager.physicsObjects.Contains(occupying)) {
-                    pmanager.physicsObjects.Remove(occupying);
+            if (updatePhysics) {
+                if (filled) {
+                    if (!GetAt(x, y).Filled) {
+                        pmanager.physicsObjects.Add(newtile);
+                    }
+                }
+                else {
+                    Tile occupying = GetAt(x, y);
+                    if (pmanager.physicsObjects.Contains(occupying)) {
+                        pmanager.physicsObjects.Remove(occupying);
+                    }
                 }
             }
+
             tiles[x, y] = newtile;
 
 
             return true;
         }
+
         public Tile GetAt(int x, int y) { // Returns 2 if out of bounds
             if (IsOutside(x, y)) {
                 return nulltile;
@@ -125,11 +131,23 @@ namespace Subterranea {
                 }
             }
             System.Console.WriteLine("Done.");
-            System.Console.Write("Smoothing terrain... ");
+            System.Console.Write("Smoothing terrain");
             // Third pass - Remove floating and hanging blocks
             for (int i = 0; i < 5;i++) {
+                System.Console.Write(".");
                 Smooth(2);
 
+            }
+            Console.WriteLine("Done.");
+            Console.WriteLine("Applying physics...");
+            for (int x = 0; x < MAPX; x++) {
+                for (int y = 0; y < MAPY; y++) {
+                    Tile occupying = GetAt(x, y);
+                    if (occupying.Filled) {
+                        pmanager.physicsObjects.Add(occupying);
+                    }
+
+                }
             }
             SetAt(0,0,false);
             System.Console.WriteLine("Done.");
