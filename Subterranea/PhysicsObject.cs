@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 namespace Subterranea {
-    public abstract class PhysicsObject : Object{
+    public class PhysicsObject : Object{
         public Polygon polygon;
         public Vector2 position;
         public Vector2 velocity;
@@ -11,8 +11,14 @@ namespace Subterranea {
         public void SetStatic() {
             mass = 0;
         }
+        public PhysicsObject() {
+            force = new Vector2();
+        }
         public void PhysicsUpdate(GameTime delta) {
-            //TODO - Write this
+            float dt = (float) delta.ElapsedGameTime.TotalSeconds;
+            velocity += (1 / mass * force) * dt;
+            position += velocity * dt;
+            force = new Vector2();
         }
     }
 }

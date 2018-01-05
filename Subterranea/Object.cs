@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 namespace Subterranea {
-    public abstract class Object {
+    public class Object {
         public Scene scene = null;
         public Vector2 scale = new Vector2(1,1);
         public Vector2 position = new Vector2(1, 1);

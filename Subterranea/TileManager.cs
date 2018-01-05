@@ -19,20 +19,8 @@ namespace Subterranea {
         public void Update(GameTime delta) {
 
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public TileManager(Scene scene) {
-            nulltile = new Tile();
-            pmanager = scene.physicsManager;
-=======
         public TileManager() {
             nulltile = new Tile();
->>>>>>> parent of 5d61e7a... Add and remove
-=======
-        public TileManager(MainGame game) {
-            nulltile = new Tile();
-            pmanager = game.scene.physicsManager;
->>>>>>> parent of da43d68... dfsafadsafds
         }
         public Vector2 GetInput() {
             if (Keyboard.GetState().IsKeyDown(Keys.A)) {
