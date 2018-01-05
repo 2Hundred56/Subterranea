@@ -122,6 +122,7 @@ namespace Subterranea {
                     foreach (int[] offset in sideOffsets) {
                         if (GetAt(offset[0] + x, offset[1] + y).Filled) {
                             neighbors++;
+                        
                         }
                     }
                     if (neighbors < minNeighbors) {
@@ -229,10 +230,10 @@ namespace Subterranea {
             UpdateSlopes(new Rectangle(1, 1, MAPX - 1, MAPY - 1));
         }
 
-        public void NeighborsAt(int x, int y) {
+        public int NeighborsAt(int x, int y) {
             int n = 0;
             foreach (int[] offset in sideOffsets) {
-                if (GetAt(x,y).Filled) {
+                if (GetAt(x+offset[0],y+offset[1]).Filled) {
                     n++;
                 }
             }

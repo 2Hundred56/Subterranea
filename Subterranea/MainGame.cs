@@ -13,6 +13,7 @@ namespace Subterranea {
         TileManager tileManager;
         Texture2D pixel;
         Texture2D slope;
+        Texture2D circle;
         LivingObject olivia;
         public Vector2 camera = new Vector2(0, 0);
         public Vector2 cameraSize = new Vector2(40, 30);
@@ -75,6 +76,18 @@ namespace Subterranea {
                        tint,
                        (float)Math.Atan2(rotVector.Y, rotVector.X));
         }
+        public void DrawCircle(Vector2 point, float radius, Color tint) {
+            DrawSprite(circle,new Bounding(point.X,point.Y,radius*2,radius*2),tint);
+        }
+        public void DrawLines(Vector2[] points, Color tint, float thickness = 0.1f) {
+            Vector2 lastPoint = points[0];
+            DrawCircle(lastPoint,thickness/2,tint);
+            for (int i = 1;i<points.Length;i++) {
+                DrawLine(lastPoint,points[i],tint,thickness);
+                DrawCircle(points[i], thickness / 2, tint);
+                lastPoint = points[i];
+            }
+        }
         public void DrawSprite(Texture2D tex, Bounding bounds, Color tint, float rot = 0, Vector2? _pivot=null) { // Draws a sprite in world space
             Vector2 pivot;
             if (_pivot==null) {
@@ -104,6 +117,7 @@ namespace Subterranea {
             pixel.SetData<Color>(new Color[] { Color.White });
             // TODO: use this.Content to load your game content here
             slope = Content.Load<Texture2D>("slope");
+            circle = Content.Load<Texture2D>("circle");
             olivia = new Player(tileManager, new Vector2(16.5f, 0));
             Polygon rect = Polygon.AABB(olivia, 0.5f, 0.5f);
             tileManager.Add(olivia);
@@ -166,6 +180,9 @@ namespace Subterranea {
                         else {
                             DrawSprite(slope, new Bounding(i, j, 1, 1), Color.SandyBrown, (int)tile.Slope);
 
+                        }
+                        if (tileManager.NeighborsAt(i, j) != 4) {
+                            
                         }
 
                     }
