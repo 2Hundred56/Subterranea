@@ -13,13 +13,16 @@ namespace Subterranea {
         public Scene() {
             objects = new List<Object>();
 <<<<<<< HEAD
+<<<<<<< HEAD
             physicsManager = new PhysicsManager();
+=======
+>>>>>>> parent of 3522ea1... Look at it
             tileManager = new TileManager(this);
 =======
             tileManager = new TileManager();
 >>>>>>> parent of da43d68... dfsafadsafds
             inputManager = new InputManager();
-
+            physicsManager = new PhysicsManager();
         }
         public void Add(Object obj) {
             objects.Add(obj);
