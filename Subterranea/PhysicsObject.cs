@@ -6,7 +6,7 @@ namespace Subterranea {
         public Vector2 velocity;
         public Vector2 force;
         public float mass;
-        public bool noForces;
+        public bool noForces = false;
 
         public float friction;
         public float bouncy;

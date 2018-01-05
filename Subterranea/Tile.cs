@@ -36,6 +36,7 @@ namespace Subterranea {
             set {
                 sloped = true;
                 slopeRotation = value;
+                polygon = Polygon.RightTriangle(this, slopeRotation, 0.5f);
             }
         }
         public Tile(TileManager mng, bool filled, Vector2 pos) {
@@ -43,6 +44,9 @@ namespace Subterranea {
             slopeRotation = 0;
             _position = pos;
             this.filled = filled;
+            if (filled) {
+                polygon = Polygon.AABB(this, 0.5f, 0.5f);
+            }
         }
     }
 }

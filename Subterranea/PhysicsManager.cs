@@ -14,15 +14,30 @@ namespace Subterranea {
         public void Add(PhysicsObject obj) {
             physicsObjects.Add(obj);
         }
+        public HashSet<PhysicsObject[]> TagCollisions()
+        {
+            return new HashSet<PhysicsObject[]>();
+        }
+        public void ResolveCollision(PhysicsObject[] pair) {
+            
+        }
+        public void CheckPenetration(PhysicsObject[] pair) {
+            
+        }
         public void Update(GameTime delta) {
             float dt = (float)delta.ElapsedGameTime.TotalSeconds;
-            //Tag possible collisions
-            //Solve collisions
+            HashSet<PhysicsObject[]> tags = TagCollisions();
+            foreach (PhysicsObject[] tag in tags) {
+                ResolveCollision(tag);
+            }
             foreach (PhysicsObject physicsObject in physicsObjects) {
                 physicsObject.AddForce(gravity*dt);
                 physicsObject.PhysicsUpdate(delta);
             }
-            //Fix penetration
+
+            foreach (PhysicsObject[] tag in tags) {
+                CheckPenetration(tag);
+            }
         }
     }
 }
