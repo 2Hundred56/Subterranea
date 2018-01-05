@@ -20,9 +20,9 @@ namespace Subterranea {
         public void Update(GameTime delta) {
 
         }
-        public TileManager(MainGame game) {
+        public TileManager(Scene scene) {
             nulltile = new Tile();
-            pmanager = game.scene.physicsManager;
+            pmanager = scene.physicsManager;
         }
         public Vector2 GetInput() {
             if (Keyboard.GetState().IsKeyDown(Keys.A)) {

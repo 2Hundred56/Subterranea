@@ -12,7 +12,7 @@ namespace Subterranea {
         public List<Object> objects;
         public Scene() {
             objects = new List<Object>();
-            tileManager = new TileManager();
+            tileManager = new TileManager(this);
             inputManager = new InputManager();
             physicsManager = new PhysicsManager();
         }
