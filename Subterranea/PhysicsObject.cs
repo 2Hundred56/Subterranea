@@ -6,26 +6,28 @@ namespace Subterranea {
         public Vector2 velocity;
         public Vector2 force;
         public float mass;
-        public bool noForces = false;
-
         public float friction;
         public float bouncy;
         public void SetStatic() {
             mass = 0;
+        }
+        public float inverseMass {
+            get {
+                if (mass == 0) return 0;
+                else return 1 / mass;
+            }
         }
         public PhysicsObject() {
             force = new Vector2();
         }
         public void PhysicsUpdate(GameTime delta) {
             float dt = (float) delta.ElapsedGameTime.TotalSeconds;
-            velocity += (1 / mass * force) * dt;
+            velocity += (inverseMass * force) * dt;
             position += velocity * dt;
             force = new Vector2();
         }
         public void AddForce(Vector2 force) {
-            if (!noForces) {
-                this.force += force;
-            }
+            this.force += force;
         }
     }
 }

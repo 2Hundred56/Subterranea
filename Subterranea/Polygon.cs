@@ -101,5 +101,19 @@ namespace Subterranea {
             }
             return new double[] { min, max };
         }
+        public Rectangle tileBounds() {
+            int minx = 10000;
+            int miny = 10000;
+            int maxx = -10000;
+            int maxy = -10000;
+            foreach (Vector2 point in points) {
+                if (point.X<minx) {
+                    minx = (int)point.X;
+                }
+                if (point.X>maxx) {
+                    maxx = (int)point.X;
+                }
+            }
+        }
     }
 }
