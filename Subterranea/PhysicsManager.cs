@@ -16,6 +16,9 @@ namespace Subterranea {
         }
         public HashSet<PhysicsObject[]> TagCollisions()
         {
+            foreach (PhysicsObject physicsObject in physicsObjects) {
+                Rec
+            }
             return new HashSet<PhysicsObject[]>();
         }
         public void ResolveCollision(PhysicsObject[] pair) {

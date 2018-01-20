@@ -108,11 +108,12 @@ namespace Subterranea {
             int maxy = -10000;
             foreach (Vector2 point in points) {
                 if (point.X<minx) {
-                    minx = (int)point.X;
+                    minx = Math.Floor(point.X);
                 }
                 if (point.X>maxx) {
-                    maxx = (int)point.X;
+                    maxx = Math.Ceiling(point.X);
                 }
+                 
             }
         }
     }
